@@ -1,0 +1,40 @@
+import random
+
+# Define the deck of cards
+suits = ['Hearts', 'Diamonds', 'Clubs', 'Spades']
+ranks = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'Jack', 'Queen', 'King', 'Ace']
+deck = [(rank, suit) for rank in ranks for suit in suits]
+
+# Function to deal five cards to each player
+def deal_cards(num_players):
+    random.shuffle(deck)
+    hands = [deck[i:i+5] for i in range(0, num_players*5, 5)]
+    return hands
+
+# Function to determine the winning hand
+def determine_winner(hands):
+    # Implement your poker hand evaluation logic here
+    # You can compare the ranks and suits of the cards to determine the winning hand
+    # This simplified version does not include all the poker hand rankings and rules
+
+    # Print the hands of all players
+    for i, hand in enumerate(hands):
+        print(f"Player {i+1} hand: {', '.join([rank+' of '+suit for rank, suit in hand])}")
+
+# Main game loop
+while True:
+    num_players = int(input("Enter the number of players (2-4): "))
+
+    if num_players < 2 or num_players > 4:
+        print("Invalid number of players. Please enter a number between 2 and 4.")
+        continue
+
+    # Deal cards to players
+    hands = deal_cards(num_players)
+
+    # Determine the winner
+    determine_winner(hands)
+
+    play_again = input("Do you want to play again? (yes/no): ")
+    if play_again.lower() != "yes":
+        break
